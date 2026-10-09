@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى سارة - حبيبتي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Aref+Ruqaa:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <canvas id="petalsCanvas"></canvas>
+
+    <div class="sound-toggle" id="soundToggle" title="تشغيل/إيقاف الموسيقى">
+        <i class="fas fa-volume-mute"></i>
+    </div>
+
+    <header class="hero">
+        <div class="hero-content glass-card">
+            <h1 class="title">سارة</h1>
+            <p class="subtitle">أميرتي، رفيقة دربي، وأجمل خلق الله</p>
+            <button class="btn scroll-btn" id="startBtn">
+                إلى حديقتكِ <i class="fas fa-arrow-down bouncy-arrow-inline" style="margin-right: 8px;"></i>
+            </button>
+        </div>
+    </header>
+
+    <section class="game-section hidden-section" id="gameSection">
+        <div class="section-header">
+            <h2>اجمعي باقة وردك</h2>
+            <p>اضغطي على كل وردة لتتفتح وتكشف لكِ سراً!</p>
+            <div class="bouncy-arrow" style="margin-bottom: 15px;"><i class="fas fa-arrow-down"></i></div>
+            <div class="counter"><span id="roseCounter">0</span> / 5 وردات</div>
+        </div>
+
+        <div class="garden" id="garden">
+            <!-- Roses will be injected by JavaScript -->
+        </div>
+
+        <div class="grand-bouquet-container" id="grandBouquetContainer">
+            <div class="glow"></div>
+            <div class="grand-bouquet">💐</div>
+            <div class="bouncy-arrow" style="margin-top: 15px; margin-bottom: -15px;"><i class="fas fa-arrow-down"></i>
+            </div>
+            <button class="btn unlock-btn" id="unlockLetterBtn">رسالتي الخاصة لكي يا سارة <i
+                    class="fas fa-heart"></i></button>
+        </div>
+    </section>
+
+    <section class="milestone-section hidden-section" id="milestoneSection">
+        <div class="glass-card counter-card">
+            <h2>باقي علي الفرح</h2>
+            <div class="days-counter" id="daysCounter">...</div>
+            <p>وكل يوم أحبك أكثر من الي قبله</p>
+        </div>
+    </section>
+
+    <section class="gallery-section hidden-section" id="gallerySection">
+        <div class="section-header">
+            <h2>أجمل ذكرياتنا</h2>
+            <p>لحظات لا تُنسى وحب يكبُر كل يوم</p>
+        </div>
+        <div class="photo-gallery" id="photoGallery">
+            <div class="polaroid">
+                <img src="images/WhatsApp Image 2026-08-12 at 2.45.12 PM.jpeg" alt="Memory 1" loading="lazy">
+                <div class="caption">يا أجمل صدفة</div>
+            </div>
+            <div class="polaroid">
+                <img src="images/WhatsApp Image 2026-08-12 at 2.45.13 PM (1).jpeg" alt="Memory 2" loading="lazy">
+                <div class="caption">ابتسامتكِ حياة</div>
+            </div>
+            <div class="polaroid">
+                <img src="images/WhatsApp Image 2026-08-12 at 2.45.14 PM (1).jpeg" alt="Memory 3" loading="lazy">
+                <div class="caption">قلبي يا ناس</div>
+            </div>
+            <div class="polaroid">
+                <img src="images/WhatsApp Image 2026-09-17 at 10.01.31 PM.jpeg" alt="Memory 4" loading="lazy">
+                <div class="caption">معكِ تحلو الأيام</div>
+            </div>
+            <div class="polaroid">
+                <img src="images/WhatsApp Image 2026-09-17 at 10.01.32 PM.jpeg" alt="Memory 5" loading="lazy">
+                <div class="caption">نور عيني</div>
+            </div>
+            <div class="polaroid">
+                <img src="images/WhatsApp Image 2026-09-17 at 10.01.34 PM (1).jpeg" alt="Memory 6" loading="lazy">
+                <div class="caption">أحبك دائماً</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for the Grand Surprise -->
+    <div class="modal-overlay" id="letterModal">
+        <!-- Envelope View -->
+        <div class="envelope-wrapper" id="envelopeWrapper">
+            <div class="envelope">
+                <div class="top-flap"></div>
+                <div class="left-flap"></div>
+                <div class="right-flap"></div>
+                <div class="bottom-flap"></div>
+                <div class="envelope-letter"></div>
+                <div class="envelope-text">إلى سارة<br><small>اضغطي للفتح</small></div>
+            </div>
+        </div>
+
+        <div class="modal-content glass-card" id="letterContent">
+            <button class="close-btn" id="closeModal">&times;</button>
+            <div class="modal-inner">
+                <div class="frame">
+                    <img src="rose.png" alt="Romantic Roses" class="love-photo">
+                </div>
+                <h3>حبيبتي سارة</h3>
+                <p class="typewriter-text" id="loveLetterText"></p>
+                <div class="letter-actions" id="letterActions"
+                    style="text-align: center; margin-top: 30px; opacity: 0; pointer-events: none; transition: opacity 1s;">
+                    <button class="btn" id="memoriesBtn">إلى أجمل ذكرياتنا <i class="fas fa-images"
+                            style="margin-right: 8px;"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox" id="closeLightbox">&times;</span>
+        <img src="" alt="Full Memory" id="lightboxImg">
+    </div>
+
+    <!-- Floating Heart Generator Button -->
+    <button class="floating-heart-btn" id="heartBtn" title="انشري الحب!">
+        <i class="fas fa-heart"></i>
+    </button>
+
+    <!-- Notification toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
