@@ -15,6 +15,17 @@
 </head>
 
 <body>
+    <!-- Login Overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="glass-card login-card">
+            <h2>مرحباً أميرتي</h2>
+            <p>أدخلي كلمة السر لفتح هديتك</p>
+            <input type="password" id="passwordInput" placeholder="كلمة السر..." dir="rtl">
+            <p class="error-msg" id="loginError"></p>
+            <button class="btn" id="loginBtn">دخول <i class="fas fa-heart"></i></button>
+        </div>
+    </div>
+
     <canvas id="petalsCanvas"></canvas>
 
     <div class="sound-toggle" id="soundToggle" title="تشغيل/إيقاف الموسيقى">

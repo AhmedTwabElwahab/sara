@@ -1,4 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ---- Login Logic ----
+    const loginOverlay = document.getElementById('loginOverlay');
+    const loginBtn = document.getElementById('loginBtn');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginError = document.getElementById('loginError');
+
+    // Prevent scrolling initially
+    document.body.style.overflow = 'hidden';
+
+    function checkPassword() {
+        const password = passwordInput.value.trim();
+        if (password === 'جالكسي') {
+            loginOverlay.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // allow scrolling
+            // Because the user clicked, we can safely init audio if it exists
+            if (typeof audioCtx !== 'undefined') {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+            } else if (typeof initAudio === 'function') {
+                initAudio();
+            }
+        } else {
+            loginError.textContent = 'كلمة السر خاطئة، حاولي مرة أخرى يا قلبي 💔';
+            passwordInput.value = '';
+            const card = document.querySelector('.login-card');
+            card.style.animation = 'shake 0.5s';
+            setTimeout(() => card.style.animation = '', 500);
+        }
+    }
+
+    if (loginBtn) {
+        loginBtn.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkPassword();
+        });
+    }
+
     // ---- Petal Animation (Canvas) ----
     const canvas = document.getElementById('petalsCanvas');
     const ctx = canvas.getContext('2d');
